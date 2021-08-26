@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base-user::Layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Contact</title>
+</head>
+<body>
+	<section>
+		<div class="card mr-3 ml-3">
+		
+			<div class="card-body">
+			
+			     <h1 class="text-center">Update Contact</h1>
+			     
+			     <div class="container-fluid  mt-1">
+			     
+					<div th:if="${session.message}" class="container mt-5">
+						<div th:classappend="${'alert-'+session.message.type}"
+							class="alert text-center">
+							<span th:text="${session.message.content}"></span>
+						</div>
+
+						<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+					</div>
+					
+
+						<div class="row">
+
+							<div class="col-md-8 offset-md-2 ">
+
+
+								<form action="#" th:object="${contact}"
+									enctype="multipart/form-data" method="post"
+									th:action="@{/user/process-update}">
+									
+									<input type="hidden" th:value="${contact.cid}" name="cid">
+									
+
+                                   <div class="container text-center">
+									<img style="width:250px;height:250px;" class= "img-fluid my_profile_picture"  src="" th:src="@{'/image/'+${contact.image}}" alt="" />
+									</div>
+									<div class="custom-file">
+										<input type="file" name="profileImage" />
+									</div>
+									
+									<div class="form-group">
+										<div class="form-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fas fa-user-alt"></i>
+												</div>
+											</div>
+											<label for="contactName">Name</label> <input th:value="${contact.name}" name="name"
+												type="text" class="form-control" id="contactName"
+												placeholder="Name" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<div class="input-group-prepend">
+												<div class="input-group-text">
+													<i class="fas fa-user-alt"></i>
+												</div>
+											</div>
+											<label for="nickName">Last Name</label> <input
+												 th:value="${contact.nickName}" name="nickName" type="text" class="form-control"
+												id="nickName" placeholder="Last Name ">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<i class="fas fa-phone"></i>
+											</div>
+										</div>
+										<label for="phoneNo">Phone</label> <input  th:value="${contact.phone}" name="phone"
+											type="number" class="form-control" id="phoneNo"
+											placeholder="Contact" required min="10">
+									</div>
+									<div class="form-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<i class="fas fa-user-alt"></i>
+											</div>
+										</div>
+										<label for="email">Email</label> <input th:value="${contact.email}" name="email"
+											type="email" class="form-control" id="email"
+											placeholder="Email " required>
+									</div>
+									<div class="form-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<i class="fas fa-briefcase"></i>
+											</div>
+										</div>
+										<label for="work">Work</label> <input th:value="${contact.work}" name="work" type="text"
+											class="form-control" id="work" placeholder="Work Details ">
+									</div>
+									<div class="form-group">
+										<textarea th:text="${contact.description}" id="mytextarea" name="description"
+											placeholder="Enter something about contact" rows="10"
+											class="form-control"></textarea>
+									</div>
+
+									<div class="container text-center">
+										<button type="submit" class="btn btn-primary">Update</button>
+										<button type="reset" class="btn btn-primary">Reset</button>
+									</div>
+									<script
+										src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
+										referrerpolicy="origin"></script>
+
+									<script>
+										tinymce.init({
+											selector : '#mytextarea'
+										});
+									</script>
+
+
+								</form>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
